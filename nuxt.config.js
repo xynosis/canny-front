@@ -3,7 +3,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'The West End Children\'s Community',
+    title: 'Canny Goat Coffee',
     htmlAttrs: {
       lang: 'en'
     },
