@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/shop/espresso", {data:[{}],fetch:{},mutations:[]});
