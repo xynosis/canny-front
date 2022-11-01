@@ -79,6 +79,7 @@ export default {
 
   //untested
   async addShippingAddress(address) {
+    console.log(address)
     return await api.customers.addresses.addAddress({ address })
 
     //     id
