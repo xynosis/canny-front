@@ -68,7 +68,7 @@ export default {
   
     async addShippingAddress() {
       let data = {
-       
+       address:{
           //company
           first_name: "Kieran",
           last_name: "Cutting",
@@ -77,7 +77,7 @@ export default {
           city: "Tynemouth",
           country_code: "UK",
           postal_code: "NE30 4PR",
-       
+       }
       };
       await this.$store.dispatch("shop/addShippingAddress", data);
     },
