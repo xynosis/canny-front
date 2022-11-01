@@ -1,4 +1,4 @@
-# LLARC
+# Canny Goat Coffee
 
 ## Build Setup
 
