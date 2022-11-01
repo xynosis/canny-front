@@ -38,7 +38,7 @@ div
         h2.f2(@click="removeFromCart(items.id)") REMOVE!
         h2.f2(@click="updateItemQuantity(items.id, 5)") CHANGE QUANTITY!
       //-handle error if not enough stock //check stock when adding
-      h1.f1(@click="addToCart('variant_01G8X9BMPGTV6CT7D3K11Y4R56', 1)") ADD TO CART!
+      h1.f1(@click="addToCart('variant_01GGQ8PFMAR2C99PXS0188465F', 1)") ADD TO CART!
       h1.f1(@click="updateCart()") ADD ADDRESS AND DISCOUNT!!
       h1.f1(@click="removeDiscount()") REMOVE DISCOUNT!
       h1.f1(@click="startPayment()") START PAYMENT!
