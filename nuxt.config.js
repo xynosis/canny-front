@@ -32,7 +32,7 @@ export default {
   css: [
     'tachyons/css/tachyons.css', '~assets/scss/colors.scss'
   ],
-  target: 'server',
+  target: 'static',
   generate: {
     fallback: true
 
