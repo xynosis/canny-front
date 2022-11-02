@@ -67,6 +67,7 @@ export default {
     },
   
     async addShippingAddress() {
+      
       let data = {
        
           //company

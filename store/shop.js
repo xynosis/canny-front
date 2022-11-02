@@ -104,7 +104,8 @@ export const actions = {
   async startPayment(context, data){
     
     const cartData = await medusaAPI.initializePaymentSession(data)
-    
+    console.log('start payment session')
+    console.log(cartData)
     context.commit('setCart', cartData.cart)
   },
   async selectStripe(context, data){

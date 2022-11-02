@@ -55,6 +55,7 @@ export default {
             let cart = this.getCart;
             // await this.$store.dispatch("shop/retrieveCart", this.getCart.id);
             let data = {
+                customer_id: 'cus_01GGQCYQZCV8EDVX27DVRDDH4K',
                 cartId: this.getCart.id,
                 update: {
                     discounts: [{ code: "TEST" }],
