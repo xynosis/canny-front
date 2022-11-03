@@ -13,10 +13,15 @@ div
     )
       .pt2.pt0-l.f5.f4-l.tr.tl-l
         .pr4-l.dib-l(v-for="items in nav")
-          nuxt-link.white.dim.link(:to='items.url' :title='items.label') {{ items.label }}
+          nuxt-link.white.dim.link(:to="items.url", :title="items.label") {{ items.label }}
         nuxt-link.dib-l(to="/cart")
           font-awesome-icon.dib.ph2.f4.font-canny-yellow(icon="shopping-cart")
-          .white.link.f5.f4-l.dib.ph2 Cart ({{ $store.getters['/cartTotal'] }})
+          //- .white.link.f5.f4-l.dib.ph2 Cart ({{ getCart.items.length }})
+          .white.link.f5.f4-l.dib.ph2 Cart (0)
+        nuxt-link.dib-l(to="/account")
+          font-awesome-icon.dib.ph2.f4.font-canny-yellow(icon="user")
+          //- .white.link.f5.f4-l.dib.ph2 Cart ({{ getCart.items.length }})
+          .white.link.f5.f4-l.dib.ph2 Account
     //- div.dtc-ns.tr.v-mid.dn-l.pr2.p0-l.link.w-100 
 
     nuxt-link.f2-l.f5-m.f2.dtc-ns.v-mid.link.w-100.w-20-ns(
@@ -77,6 +82,7 @@ div
 
 <script>
 import vClickOutside from "v-click-outside";
+import { mapGetters } from "vuex";
 
 export default {
   // watch: {
@@ -103,7 +109,16 @@ export default {
     await this.$store.dispatch("settings/fetchSettings").then(() => {
       this.nav = this.$store.getters["settings/getNav"];
     });
+ 
+    // if (this.getCart === null) {
+      //TRY TO RETRIEVE CART FIRST
+    //   await this.$store.dispatch("shop/createCart");
+    //   console.log(this.getCart)
+    // }
     console.log(this.nav);
+  },
+  computed: {
+    ...mapGetters("shop", ["getCart", "getOrder"]),
   },
   data() {
     return {

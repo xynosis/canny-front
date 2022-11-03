@@ -1,16 +1,13 @@
 <template lang="pug">
 div
   .w-80.center.h4.canny-dark
-    h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 Auth
+    h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 Your account
   .w-100.canny-light
-    div(@click="createCustomer()") Create!
-    h2(@click="login()") Login!
-    h2(@click="getSession()") Get session!
-    h2(@click="resetPassword()") Reset!
+    Login
   
-    h2(@click="addShippingAddress()") ADDRESS!
+    //- h2(@click="addShippingAddress()") ADDRESS!
 
-    h1 {{ customer }}
+    //- h1 {{ customer }}
     //- div(@click='logout()') Logout!
 </template>
 
@@ -36,35 +33,9 @@ export default {
     // this.cart = this.$store.getters["shop/getCart"];
   },
   methods: {
-    async createCustomer() {
-      console.log("making");
-      let data = {
-        email: "Testuser@test.com",
-        first_name: "Test",
-        last_name: "Test",
-        password: "tester",
-        //  phone: '075137',
-      };
-      await this.$store.dispatch("shop/createUser", data);
-    },
-    async login() {
-      console.log("login method");
-      let data = {
-        email: "Testuser@test.com",
-        password: "tester",
-      };
-      await this.$store.dispatch("shop/login", data);
-    },
-    async getSession() {
-      await this.$store.dispatch("shop/getSession");
-    },
-    async resetPassword() {
-      let data = {
-        email: "Testuser@test.com",
-        password: "test2",
-      };
-      await this.$store.dispatch("shop/resetPassword", data);
-    },
+   
+    
+ 
   
     async addShippingAddress() {
       

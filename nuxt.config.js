@@ -72,7 +72,7 @@ export default {
 
   fontawesome: {
     icons: {
-      solid: ['faSearch', 'faShoppingCart'],
+      solid: ['faSearch', 'faShoppingCart', 'faEye', 'faEyeSlash', 'faUser'],
       brands: ['faTwitter']
     }
   },

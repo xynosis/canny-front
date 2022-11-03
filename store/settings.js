@@ -48,6 +48,9 @@ export const mutations = {
 export const actions = {
   async fetchSettings(context) {
     let settingsData = await ghostAPI.getSettings()
+    for (let i=0; i < settingsData.navigation.length; i++ ){
+      settingsData.navigation[i].url =settingsData.navigation[i].url.replace('https://fractalsdesign.uk', '')
+    }
     context.commit('setSettings', settingsData)
   },
   fetchWindowWidth(context, width) {
