@@ -1,84 +1,107 @@
+
+
 <template lang="pug">
-div(v-if='page')
-    .w-80.center.h4.canny-dark
-        h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 Wholesale
+.w-100.canny-light
+  div(v-if="page")
+    .w-100.h4.canny-dark
+      .w-80.center
+        h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 {{ this.page.title }}
+    .w-100.center.canny-light
+      //- sections begin
+      .f2.font-canny-dark(v-for="items of sections")
+        //- no h2 sub element content
+        div(v-if="!items.flex")
+          .w-100.canny-dark(v-if="items.header")
+            .w-80.pv5.center
+              h1.fw5.pt4.f1.section-banner {{ items.header }}
+          .w-100.canny-light.pv5
+            .w-80.center.tc.justify-center
+              .f2.font-canny-dark.pt4.tl.w-70-l.w-100(
+                v-for="stuff of items.rest",
+                v-html="stuff"
+              ) 
+          .w-100.vh-50(
+            :style="{ 'background-image': 'url(' + items.image + ')', 'background-size': 'cover', 'background-repeat': 'no-repeat', 'background-position': 'center top' }",
+            v-if="items.image"
+          )
+
     .w-100.canny-light
-        .w-80.tc.center
-            .f2.font-canny-dark.pv5.ph4(v-html='page.html')
-    //- img.lh-0
-    //- .w-100.canny-dark
-    //-     .w-80.h4.pv5.center
-    //-         .f1.font-canny-yellow.canny-logo-serif HEADING
-        
-    //- img.lh-0(src='~/assets/images/canny-1.jpg')
-    //- .w-100.canny-dark
-    .w-100.canny-light
-        .w-80.center
-            .w-60.lh-copy.f3.font-canny-dark.pv5.ph4 If you’re interested in stocking Canny Goat Coffee, fill out our form below and we’ll get back to you with next steps.
-        .w-80.center.flex
-            .w-40 
+      .w-80.center.flex
+        .w-40-l
+        .w-60-l.w-100
+          form.measure.w-100.fr(v-if="!submitted")
+            fieldset.ba.b--transparent.ph0.mh0
+              .mt3
+                label.db.fw6.lh-copy.f3 Name
+                input.pa2.input-reset.ba.bg-transparent.outline.w-100(
+                  type="text",
+                  name="name",
+                  v-model="name"
+                )
+              .mt3
+                .flex-l
+                  .w-100.pr2-l
+                    label.db.fw6.lh-copy.f3 Email address
+                    input.pa2.input-reset.ba.bg-transparent.outline.w-100(
+                      type="email",
+                      name="email-address",
+                      v-model="email"
+                    )
+                  .w-100.pl2-l
+                    label.db.fw6.lh-copy.f3 Phone number
+                    input.pa2.input-reset.ba.bg-transparent.outline.w-100(
+                      type="tel",
+                      name="phone",
+                      v-model="phone"
+                    )
+              .mt3
+                label.db.fw6.lh-copy.f3 Business name
+                input.pa2.input-reset.ba.bg-transparent.outline.w-100(
+                  type="text",
+                  name="business-name",
+                  v-model="business"
+                )
+              .mt3
+                label.db.fw6.lh-copy.f3 What does your business do?
+                textarea.pa2.input-reset.ba.bg-transparent.outline.w-100(
+                  type="text",
+                  name="business-type",
+                  v-model="businessType"
+                )
+              .mt3
+                label.db.fw6.lh-copy.f3 Address
+                textarea.pa2.input-reset.h4.ba.bg-transparent.outline.w-100(
+                  type="text",
+                  name="address",
+                  v-model="address"
+                )
+              .mt3
+                label.db.fw6.lh-copy.f3 Anything else we should know?
+                textarea.pa2.input-reset.ba.bg-transparent.outline.w-100(
+                  type="text",
+                  name="other",
+                  v-model="other"
+                )
+              .mt3
+                legend.db.fw6.lh-copy.f3 Preferred contact:
                 div
-            .w-60
-                .black-80.flex
-                
-                    .measure.ph4.w-100
-                        label.f6.b.db.mb2(for='name')
-                        | Name 
-                        input.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='name-desc')
-                    .measure.ph4.w-100
-                        label.f6.b.db.mb2(for='surname')
-                        | Surname 
-                        input.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='surname-desc')
-                .black-80.flex
-                    .measure.ph4.w-100
-                        label.f6.b.db.mb2(for='email')
-                        | Email address 
-                        input.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='email-desc')
-                    .measure.ph4.w-100
-                        label.f6.b.db.mb2(for='phone')
-                        | Phone number
-                        input.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='phone-desc')
-                .black-80
-                    .ph4.w-100
-                        label.f6.b.db.mb2(for='business-type')
-                        | Business type
-                        input.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='business-type-desc')
-                .black-80
-                    .ph4.w-100
-                        label.f6.b.db.mb2(for='business-name')
-                        | Business name
-                        input.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='business-name-desc')
-                .black-80
-                    .ph4.w-100
-                        label.f6.b.db.mb2(for='address')
-                        | Address
-                        input.h4.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='address-desc')
-                .black-80
-                    .ph4.w-100
-                        label.f6.b.db.mb2(for='other')
-                        | Any other info we need to know?
-                        input.h3.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='other-desc')
+                  input.mh3(
+                    type="checkbox",
+                    name="pref-email",
+                    v-model="pref.email"
+                  )
+                  label.fw6.lh-copy.f3 Email
+                div
+                  input.mh3(
+                    type="checkbox",
+                    name="pref-phone",
+                    v-model="pref.phone"
+                  )
+                  label.fw6.lh-copy.f3 Phone
 
-                .black-80
-                    .ph4.w-100
-                        fieldset#favorite_movies.bn
-                            legend Preferred contact:
-                            .flex.items-center.mb2
-                                input.mh2(type='checkbox' value='email')
-                                label.lh-copy(for='email') Email
-                                input.mh2(type='checkbox' value='phone')
-                                label.lh-copy(for='phone') Phone
-                .tr
-                    a.ttu.fw6.f3.font-canny-dark.link.br3.ph3.pv2.mb2.dib.white.canny-yellow.mh3(href='#') Send
-                //- .black-80
-                //-     .ph4.w-100
-                //-         label.f6.b.db.mb2(for='template-type')
-                //-         | This is a template
-                //-         //- span.normal.black-60 (optional)
-                //-         input#name.input-reset.ba.b--black-20.pa2.mb2.db.w-100(type='text' aria-describedby='template-desc')
-                //-         small#name-desc.f6.black-60.db.mb2 Explainer text
-
-
+              .mt4.tc.v-btm.f4.flex.center
+                .w-100(@click="submit()", v-if="!submitted")
+                  Button.pointer(primary="true", text="Submit")
 </template>
 
 
@@ -86,6 +109,12 @@ div(v-if='page')
 
 <script>
 export default {
+  methods: {
+    submit() {
+      //submit to sendgrid?
+      this.submitted = true;
+    },
+  },
   async mounted() {
     if (this.$store.getters["posts/getAllPages"] === null) {
       await this.$store.dispatch("posts/fetchPages");
@@ -95,18 +124,54 @@ export default {
       route = this.$route.path.substring(1, this.$route.path.length);
     }
     this.page = this.$store.getters["posts/getPageBySlug"](route);
+    this.sections = this.pageProcessor(this.page.html, "h1");
 
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.sections[i].includes("h2")) {
+        this.sections[i] = this.pageProcessor(this.sections[i], "h2");
+        this.sections[i] = {
+          header: this.elementExtractor(this.sections[i][0], "h1"),
+          // header: this.sections[i][0],
+          rest: this.sections[i].slice(1, this.sections[i].length),
+          flex: true,
+        };
+        for (let j = 0; j < this.sections[i].rest.length; j++) {
+          this.sections[i].rest[j] = this.elementExtractor(
+            this.sections[i].rest[j],
+            "h2"
+          );
+        }
+      } else {
+        let temp = this.elementExtractor(this.sections[i], "h1");
+
+        this.sections[i] = {
+          header: temp.title,
+          rest: temp.text,
+          image: temp.image,
+          flex: false,
+        };
+        console.log(this.sections[i]);
+      }
+    }
     if (this.page == null) {
       this.page = {
         title: "Oops!",
       };
       this.error = true;
     }
-
   },
   data() {
     return {
-      page: null
+      page: null,
+      submitted: false,
+      name: null,
+      email: null,
+      phone: null,
+      business: null,
+      businessType: null,
+      address: null,
+      other: null,
+      pref: { email: false, phone: false },
     };
   },
 };

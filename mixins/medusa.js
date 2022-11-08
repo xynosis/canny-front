@@ -11,7 +11,8 @@ export default {
                 //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
             });
             return formatter.format(num)
-        },
+        }
+        ,
         toDate(date) {
             console.log(date)
             const options = { year: "numeric", month: "long", day: "numeric" }

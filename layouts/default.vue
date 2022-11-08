@@ -10,12 +10,15 @@ import Nav from '../components/Nav.vue'
 import Footer from '../components/Footer.vue'
 
 import Vue from 'vue'
-import medusa from '~/mixins/medusa.js'
+import medusaMix from '~/mixins/medusa.js'
+import htmlMix from '~/mixins/html.js'
 
-Vue.mixin(medusa)
+Vue.mixin(medusaMix)
+Vue.mixin(htmlMix)
 export default {
   components: { 
     Nav, Footer
+  
   }
 }
 </script>
@@ -23,7 +26,6 @@ export default {
 <style lang='scss'>
 body{
   font-family: 'Brandon Grotesque';
-  color: #ffffff;
 }
 
 .font-canny-yellow{

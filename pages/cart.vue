@@ -2,7 +2,7 @@
 div
   .w-80.center.h4.canny-dark
     h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 Your cart
-  .w-100.canny-light
+  .w-100.canny-light.vh-50
     .w-70.tc.black.center(v-if="getCart")
       //- .black {{ getCart }}
       //- h1 Cart ID {{ getCart.id }}

@@ -12,32 +12,120 @@ $yellow: #DFB036;
 $teal: #25B4B1;
 $light: #EAEBEC;
 
-.primary{
+.primary {
     color: $primary;
 }
-.primary-bg{
+
+.primary-bg {
     background-color: $primary;
 }
-.secondary{
+
+.secondary {
     color: $secondary;
 }
-.secondary-bg{
+
+.secondary-bg {
     background-color: $secondary;
 }
-.green{
+
+.green {
     color: $green;
 }
-.green-bg{
+
+.green-bg {
     background-color: $green;
 }
 
-h1, h2 {
+h1,
+h2 {
     font-weight: 700;
     color: black;
 }
 
-p{
+p {
     font-size: 1.3rem;
     line-height: 1.7rem;
     color: black;
 }
+
+.font-canny-yellow {
+    color: $yellow;
+}
+
+.font-canny-dark {
+    color: $dark;
+}
+
+.canny-dark {
+    background-color: $dark;
+}
+
+.canny-yellow {
+    background-color: $yellow;
+}
+
+.canny-header {
+    font-family: 'Fairwater Sans';
+    font-weight: 500;
+}
+
+.canny-logo-serif {
+    font-family: 'Fairwater Open Serif';
+}
+
+.canny-logo-script {
+    font-family: 'Fairwater Script';
+}
+
+.canny-light {
+    background-color: $light;
+}
+
+// .section-banner {
+//     width: 100%;
+
+//     div & {
+//         margin-left: auto;
+
+//         background-color: $dark;
+//         margin-right: auto;
+//         padding-top: var(--spacing-extra-large);
+//         padding-bottom: var(--spacing-extra-large);
+
+//         h1 & {
+//             font-family: 'Fairwater Open Serif';
+//             color: $yellow;
+//             text-align: left;
+
+//         }
+//         p & {
+//             background-color: $light;
+//             font-family: 'Fairwater Open Serif';
+//             color: $yellow;
+//             text-align: center;
+
+//         }
+//     }
+// }
+
+.section-banner{
+    font-family: 'Fairwater Open Serif';
+    color: $yellow;
+    text-align: left;
+}
+
+//     & {
+//         margin-left: auto;
+//         margin-right: auto;
+//         padding-top: var(--spacing-extra-large);
+//         padding-bottom: var(--spacing-extra-large);
+//         // width: 100%;
+//         // background-color: $dark;
+
+//         //   &{
+
+//         //   }  
+//     }
+// }
+
+// h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5

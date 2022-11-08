@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style scoped>
-a {
+a, a:visited, a:visited h1 {
   text-decoration: none;
 }
 </style>

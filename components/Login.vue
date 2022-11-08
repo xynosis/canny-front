@@ -1,25 +1,25 @@
 <template lang="pug">
 main.pa4.black-80
   //- if loggedin or cookie stay loggedin
-  form.measure.center(v-if='!loggedIn && !signedUp')
+  form.measure.center(v-if="!loggedIn && !signedUp")
     fieldset#sign_up.ba.b--transparent.ph0.mh0
       .mt3(v-if="signup")
-        label.db.fw6.lh-copy.f3(for="email-address") First name
-        input#email-address.pa2.input-reset.ba.bg-transparent.outline.w-100(
-          type="email",
+        label.db.fw6.lh-copy.f3 First name
+        input.pa2.input-reset.ba.bg-transparent.outline.w-100(
+          type="text",
           name="first-name",
           v-model="first"
         )
       .mt3(v-if="signup")
-        label.db.fw6.lh-copy.f3(for="email-address") Last name
-        input#email-address.pa2.input-reset.ba.bg-transparent.outline.w-100(
-          type="email",
+        label.db.fw6.lh-copy.f3 Last name
+        input.pa2.input-reset.ba.bg-transparent.outline.w-100(
+          type="text",
           name="last-name",
           v-model="last"
         )
       .mt3
-        label.db.fw6.lh-copy.f3(for="email-address") Email
-        input#email-address.pa2.input-reset.ba.bg-transparent.outline.w-100(
+        label.db.fw6.lh-copy.f3 Email
+        input.pa2.input-reset.ba.bg-transparent.outline.w-100(
           type="email",
           name="email-address",
           v-model="email"
@@ -33,12 +33,13 @@ main.pa4.black-80
             v-model="password"
           )
           font-awesome-icon(
-            :icon="passwordFieldType1  === 'password' ? 'eye' : 'eye-slash'",
+            :icon="passwordFieldType1 === 'password' ? 'eye' : 'eye-slash'",
             @click="viewPass1()"
           )
-      .mt3(v-if="signup" :class='passwordError?"red" : "black-80"' )
-        label.db.fw6.lh-copy.f3(for="password" ) Retype your password
-        input#password.b.pa2.input-reset.ba.bg-transparent.outline.w-100(:class='passwordError?"red" : "black-80"' 
+      .mt3(v-if="signup", :class="passwordError ? 'red' : 'black-80'")
+        label.db.fw6.lh-copy.f3(for="password") Retype your password
+        input#password.b.pa2.input-reset.ba.bg-transparent.outline.w-100(
+          :class="passwordError ? 'red' : 'black-80'",
           :type="passwordFieldType2",
           name="password-conf",
           v-model="passwordValidator"
@@ -47,26 +48,25 @@ main.pa4.black-80
           :icon="passwordFieldType2 === 'password' ? 'eye' : 'eye-slash'",
           @click="viewPass2()"
         )
-        label.db.fw6.lh-copy.mt3.red(for="password-error" v-if='passwordError') Your passwords don't match!
+        label.db.fw6.lh-copy.mt3.red(
+          for="password-error",
+          v-if="passwordError"
+        ) Your passwords don't match!
       .lh-copy.mt3.tr
-        a.f6.link.dim.black.db(href="#0" @click='resetPassword()') Forgot your password?
-      .mt4.tc.v-btm.f4
-        a.ttu.font-canny-dark.link.br3.ph3.pv2.mb2.dib.white.canny-yellow.mh3.pointer(
-          type="submit",
-          v-if="!signup",
-          @click="login()"
-        ) Log in
-        a.ttu.link.br3.ph3.pv2.mb2.ba.dib.font-canny-dark.mh3.pointer(
-          v-if="signup",
-          @click="signUpMethod()"
-        ) Sign up
-        a.ttu.link.br3.ph3.pv2.mb2.ba.dib.font-canny-dark.mh3.pointer(
-          v-if="!signup",
-          @click="signup = !signup"
-        ) Sign up
-  OrderHistory(v-if='loggedIn') 
+        a.f6.link.dim.black.db(href="#0", @click="resetPassword()") Forgot your password?
+      .mt4.tc.v-btm.f4.flex.center
+        .w-100(@click="login()", v-if="!signup")
+          Button.pointer(primary="true", text="Log in")
+        .w-100(@click="signUpMethod()", v-if="signup")
+          Button.pointer(primary="true", text="Sign up")
+        .w-100(@click="signup = !signup", v-if="!signup")
+          Button.pointer(tertiary="true", text="Sign up")
+
+  OrderHistory(v-if="loggedIn") 
 </template>
 
+
+  
 <script>
 export default {
   data() {
@@ -81,7 +81,7 @@ export default {
       passwordValidator: "",
       passwordError: false,
       signedUp: false,
-      loggedIn: false
+      loggedIn: false,
     };
   },
   methods: {
@@ -92,7 +92,7 @@ export default {
       };
       await this.$store.dispatch("shop/login", data);
       this.getSession();
-      this.loggedIn=true;
+      this.loggedIn = true;
     },
     async getSession() {
       await this.$store.dispatch("shop/getSession");

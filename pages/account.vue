@@ -2,7 +2,7 @@
 div
   .w-80.center.h4.canny-dark
     h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 Your account
-  .w-100.canny-light
+  .w-100.canny-light.vh-50
     Login
   
     //- h2(@click="addShippingAddress()") ADDRESS!

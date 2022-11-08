@@ -45,10 +45,10 @@ export default {
   */
 
   //untested - but unnecessary i think
-  //  async getAllCollections() {
-  //    return await api.collections.list()
-  //   },
-  //   //untested
+  async getAllCollections() {
+    return await api.collections.list()
+  },
+  //untested
   //   async getCollectionByID(collection_id) {
   //     return await api.collections.retrieve(collection_id)
   //   },

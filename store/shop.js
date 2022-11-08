@@ -7,7 +7,8 @@ export const state = () => ({
   cart: null,
   regions: null,
   user: null,
-  order: null
+  order: null,
+  categories: null
 })
 
 export const getters = {
@@ -29,7 +30,11 @@ export const getters = {
   },
   getOrder: (state) => {
     return state.order
-  }
+  }, 
+  getCategories: (state) => {
+    return state.categories
+  }, 
+
 }
 
 export const mutations = {
@@ -50,6 +55,9 @@ export const mutations = {
   }, 
   setOrder(state, payload) {
     state.order = payload
+  },
+  setCategories(state, payload) {
+    state.categories = payload
   }
 
 }
@@ -169,6 +177,11 @@ export const actions = {
   async getSession(context) {
     const userData = await medusaAPI.getSession()
     context.commit('setUser', userData.customer)
+  },
+  async fetchAllCategories(context) {
+    const categoryData= await medusaAPI.getAllCollections()
+    console.log(categoryData)
+    context.commit('setCategories', categoryData.collections)
   },
   // async logout(context){
   //   const userData = await medusaAPI.logout()
