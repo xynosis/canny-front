@@ -226,7 +226,7 @@ export default {
             // );
             await this.$stripe.confirmPayment({
                 elements, confirmParams: {
-                    return_url: 'http://localhost:3000/complete'
+                    return_url: 'https://test.fractalsdesign.uk/complete'
                 }
             }).then(({ error, paymentIntent }) => {
                 console.error(error)
