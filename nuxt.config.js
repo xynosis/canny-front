@@ -60,7 +60,9 @@ export default {
   ],
   stripe: {
     //process.env.PUBLISHABLE_KEY abd add .env file
-    publishableKey: 'pk_test_51IG42bHYI4OuD4BxkIfFlFcNYmNA1NMQ4bUYAu0uWFRQbXdIpaI6nS1pRpmCXFYRJMA1G2qHEAjPtRgWWjkaIqp000QwFBOGKk', locale: 'en-GB'
+    // publishableKey: 'pk_test_51IG42bHYI4OuD4BxkIfFlFcNYmNA1NMQ4bUYAu0uWFRQbXdIpaI6nS1pRpmCXFYRJMA1G2qHEAjPtRgWWjkaIqp000QwFBOGKk', locale: 'en-GB'
+
+    publishableKey: 'pk_live_51IG42bHYI4OuD4BxQSaWdlTqz6qNleqma5HynC85jvR2JHvzGuraxqancyymoNZw3X6WfHeU1cEulaSTAzNcccMv00XReFWmIN', locale: 'en-GB'
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

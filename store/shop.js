@@ -1,4 +1,4 @@
-import medusa from '../api/medusa'
+
 import medusaAPI from '../api/medusa'
 
 export const state = () => ({
@@ -8,7 +8,8 @@ export const state = () => ({
   regions: null,
   user: null,
   order: null,
-  categories: null
+  categories: null,
+  error: null
 })
 
 export const getters = {
@@ -30,10 +31,13 @@ export const getters = {
   },
   getOrder: (state) => {
     return state.order
-  }, 
+  },
   getCategories: (state) => {
     return state.categories
-  }, 
+  },
+  getError: (state) => {
+    return state.error
+  },
 
 }
 
@@ -52,13 +56,16 @@ export const mutations = {
   },
   setShipping(state, payload) {
     state.shipping = payload
-  }, 
+  },
   setOrder(state, payload) {
     state.order = payload
   },
   setCategories(state, payload) {
     state.categories = payload
-  }
+  },
+  setError(state, payload) {
+    state.error = payload
+  },
 
 }
 
@@ -68,6 +75,10 @@ export const actions = {
     context.commit('setProducts', productsData.products)
   },
 
+  async getOrderByCartID(context, cartID) {
+    const orderData = await medusaAPI.getOrderByCartID(cartID)
+    context.commit('setOrder', orderData.order)
+  },
   //---------------
 
   async createCart(context) {
@@ -75,8 +86,9 @@ export const actions = {
     context.commit('setCart', cartData)
   },
   async addItemToCart(context, data) {
+    console.log(data)
     const cartData = await medusaAPI.addItemToCart(data.cartId, data.variantId, data.quantity)
-    // console.log(cartData)
+    console.log(cartData)
     context.commit('setCart', cartData.cart)
 
   },
@@ -92,47 +104,54 @@ export const actions = {
   },
   async retrieveCart(context, cartId) {
     const cartData = await medusaAPI.retrieveCart(cartId)
-    context.commit('setCart', cartData.cart)
+
+    context.commit('setCart', cartData)
 
   },
 
   async updateCart(context, data) {
     const cartData = await medusaAPI.updateCart(data.cartId, data.update)
+    console.log(cartData)
+    console.log('cartyboi')
     context.commit('setCart', cartData.cart)
+
 
   },
   async removeDiscount(context, data) {
-    console.log(data)
+
     const cartData = await medusaAPI.removeDiscount(data.cartId, data.code)
     context.commit('setCart', cartData.cart)
 
   },
 
   //-----
-  async startPayment(context, data){
-    
+  async startPayment(context, data) {
+
     const cartData = await medusaAPI.initializePaymentSession(data)
     console.log('start payment session')
     console.log(cartData)
     context.commit('setCart', cartData.cart)
   },
-  async selectStripe(context, data){
-    
-    const cartData = await medusaAPI.setPaymentSession(data,'stripe')
-      console.log(cartData.cart)
+  async selectStripe(context, data) {
+
+    const cartData = await medusaAPI.setPaymentSession(data, 'stripe')
+    console.log(cartData.cart)
     context.commit('setCart', cartData.cart)
   },
-  async completeCart(context, data){
-    const orderData = await medusaAPI.completeCart(data.cartId)
-    context.commit('setOrder', orderData.data)
+  async completeCart(context, cartID) {
+    const cartData = await medusaAPI.completeCart(cartID)
+    context.commit('setCart', cartData.data)
   },
   ///------
-  //- for fulfilment providers
-  // async addShippingMethod(context, data){
-  //   const cartData = await medusaAPI.addShippingMethod(data.cartId, data.shippingMethod)
-  //   context.commit('setUser', cartData.cart)
 
-  // },
+  async addShippingMethod(context, data) {
+
+    const cartData = await medusaAPI.addShippingMethod(data.cartId, data.shippingMethod)
+    console.log('cartData')
+    console.log(cartData)
+    context.commit('setCart', cartData.cart)
+
+  },
   async getShippingOptionsForCart(context, data) {
     const shippingData = await medusaAPI.getShippingOptionsForCart(data.cartId)
     context.commit('setShipping', shippingData.shipping_options)
@@ -155,46 +174,40 @@ export const actions = {
   ///--------
 
   async createUser(context, data) {
-    const user = await medusaAPI.checkEmail(data.email)
-    if (!user.exists) {
-      const userData = await medusaAPI.createCustomer(data.email, data.first_name, data.last_name, data.password, data.phone)
-      context.commit('setUser', userData.customer)
-    } else {
-      //return something about this user already existing, or
-      //link this to the loginf low
-    }
+
+    const userData = await medusaAPI.createCustomer(data.email, data.first_name, data.last_name, data.password, data.phone)
+    context.commit('setUser', userData.customer)
+
   },
   async login(context, data) {
-    const user = await medusaAPI.checkEmail(data.email)
-    if (user.exists) {
-      const userData = await medusaAPI.login(data.email, data.password)
-      context.commit('setUser', userData.customer)
-    } else {
-      //do something else, linked to sign up,
-      //saying this user doesn't exist
-    }
+
+    const userData = await medusaAPI.login(data.email, data.password)
+    context.commit('setUser', userData.customer)
+
+
   },
   async getSession(context) {
-    const userData = await medusaAPI.getSession()
-    context.commit('setUser', userData.customer)
+    try {
+      const userData = await medusaAPI.getSession()
+      context.commit('setUser', userData.customer)
+    } catch (e) {
+      console.log('wtf')
+      console.error(e)
+    }
+
   },
   async fetchAllCategories(context) {
-    const categoryData= await medusaAPI.getAllCollections()
-    console.log(categoryData)
-    context.commit('setCategories', categoryData.collections)
+    const categoryData = await medusaAPI.getAllCollections()
+
+    context.commit('setCategories', categoryData.collections.reverse())
   },
-  // async logout(context){
-  //   const userData = await medusaAPI.logout()
-  //   context.commit('setUser', userData.customer)
-  // },
-  async resetPassword(context, data) {
-    //needs this https://medusajs.com/blog/sendgrid-open-source-ecommerce 
-    //in heroku medusa git folder, go to src/subscribers, create new subscriber for sendgrid or a mail service
-    // this subscribes the password reset event and then sends an email with the data 
-    await medusa.getPasswordResetToken(data.email)
-    //i think there's nothing to set as the event should handle the rest - which makes the resetPassword() method in medusa.js redundant for the frontend
-    // const userData = await medusa.resetPassword(data.email, token, data.password)
-    // console.log(userData)
-    // context.commit('setUser', userData.customer)
+  async logout(context) {
+    await medusaAPI.logout()
+    context.commit('setUser', null)
+  },
+  async resetPassword(context,data) {
+    console.log(data)
+    const userData = await medusaAPI.resetPassword(data)
+    context.commit('setUser', userData.customer)
   }
 }

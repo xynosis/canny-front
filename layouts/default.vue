@@ -1,7 +1,7 @@
 <template lang="pug">
-div.canny-dark.vh-100
+div.canny-dark
   Nav
-  Nuxt
+  Nuxt.h-100
   Footer
 </template>
 
@@ -29,7 +29,7 @@ body{
 }
 
 .font-canny-yellow{
-    color: $yellow;
+    color: $yellow; 
 }
 .font-canny-dark{
   color: $dark;

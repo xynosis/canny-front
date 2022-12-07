@@ -1,9 +1,9 @@
 <template lang="pug">
 //- .center.dt
 //-   .dt-row.hero.w-80.vh-80 x
-.canny-dark.h-80.w-100.mt4
+.canny-dark.h-80.w-100
  
-  swiper.vh-75.w-80(:options="swiperOption")
+  swiper.vh-100.w-80(:options="swiperOption")
 
     swiper-slide.hero.relative.cover(
       v-if="!$store.getters['settings/isMobile']",
@@ -11,7 +11,8 @@
       :key="items.id",
       :style="{ background: 'url(' + items.image + ') no-repeat center center' }"
     )
-      .canny-dark.w-30.h-50.dt.mh5.verty(v-if="homeCarousel")
+      //- height of box
+      .canny-dark.w-40-l.w-50.h-50.dt.ph2.mh5.pv2.verty(v-if="homeCarousel")
         .dtc.v-mid
           .mt4.tc.f4
             h1.fw5.lh-solid.canny-logo-script.white Welcome to

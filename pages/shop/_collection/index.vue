@@ -1,24 +1,9 @@
 <template lang="pug">
-//- div
-//-   .w-80.center.h4.canny-dark
-//-     h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 {{ $route.params.collection }}
-//-   .w-100.canny-light.h-100.center.flex.items-center.align-center.justify-center
-//-     nuxt-link.canny-yellow.h-100.w-25-l.w-80.mv4(:to='$route.params.collection + "/" + items.handle' v-for="items in collection")
-//-       .vh-25-l.vh-50(v-if='items.images[0]'
-//-         :style="{ 'background-image': 'url(' + items.images[0].url + ')', 'background-size': 'cover', 'background-repeat': 'no-repeat', 'background-position': 'center' }"
-//-       )
-//-       .vh-25-l.vh-50.canny-dark.pa2
-//-         h1.white {{ items.title }}
-//-         p.white {{ items.description }}
-//-         span.white {{ toCurrency(items.variants[0].prices[0].amount) }}
-//-         span.white {{ items.variants[0].title }}
-//-         //- div {{ items.node.process }}
-//-         //- div {{ items.node.notes }}
-.justify-center.items-center.pv4
-  .w-80.center.h4.canny-dark
+.justify-center.items-center
+  .w-80.center.canny-dark
     h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5 {{ $route.params.collection }}
   .w-100.canny-light.h-100
-    .mh5-l.mv4.pa4.flex-wrap(
+    .mh5-l.pa4.flex-wrap(
       :class="{ flex: !$store.getters['settings/isMobile'] }"
     )
       .center(
@@ -37,16 +22,26 @@
               v-if="items.images[0]",
               :style="{ 'background-image': 'url(' + items.images[0].url + ')', 'background-size': 'cover', 'background-repeat': 'no-repeat', 'background-position': 'center' }"
             )
+            .aspect-ratio.post.relative.aspect-ratio--7x5.canny-dark(
+              v-if="!items.images[0]"
+            )
             .ph3.pb3.link.w-100.font-canny-yellow
-              h1.canny-logo-serif.font-canny-yellow {{ items.title }}
-              p.white {{ items.description }}
+              h1.canny-logo-serif.font-canny-yellow.tc {{ items.title }}
+              h2.canny-header.font-canny-teal.f4.tc {{ items.subtitle }}
+              div(
+                v-if="$route.params.collection === 'filter' || $route.params.collection === 'espresso'"
+              )
+                p.white Tastes like:
+                .flex.justify-center
+                  .f4.ph3.canny-logo-script(
+                    v-for="tag in items.tags",
+                    v-if="items.tags"
+                  ) {{ tag.value }}
+              div(
+                v-if="$route.params.collection === 'merch' || $route.params.collection === 'equipment'"
+              ) 
+                p.white {{ items.description }}
               p.white.canny-header.tr from {{ toCurrency(items.variants[0].prices[0].amount) }}
-              //- p.white.canny-header {{ items.variants[0].title }}
-            //- div {{ items.node.process }}
-            //- div {{ items.node.notes }}
-          //- h2.f3.mb0.fw5 {{ items.title }}
-          //-       //- p.lh-copy.fw4.mt2(v-html="excerpt(html)", v-if="html")
-          //- p.tl.f4.fw4.underline Read more
 </template>
 <script>
 export default {
@@ -82,7 +77,9 @@ export default {
 </script>
 
 <style scoped>
-a, a:visited, a:visited h1 {
+a,
+a:visited,
+a:visited h1 {
   text-decoration: none;
 }
 </style>

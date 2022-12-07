@@ -1,17 +1,19 @@
-$primary: #98297B;
-$secondary: #818DD3;
-$green: #26A243;
+$primary: #323F48;
+$secondary: #DFB036;
+$tertiary: #25B4B1;
 
 $background: #F8F8FF;
 $header-font: 'Poppins', 'Arial', sans-serif;
-// $body-font: 'Brandon Grotesque','Arial', sans-serif;
-$body-font: 'Poppins', 'Arial', sans-serif;
+$body-font: 'Brandon Grotesque','Arial', sans-serif;
 
 $dark: #323F48;
 $yellow: #DFB036;
 $teal: #25B4B1;
 $light: #EAEBEC;
 
+input {
+    border-radius: 6px;
+}
 .primary {
     color: $primary;
 }
@@ -28,13 +30,6 @@ $light: #EAEBEC;
     background-color: $secondary;
 }
 
-.green {
-    color: $green;
-}
-
-.green-bg {
-    background-color: $green;
-}
 
 h1,
 h2 {
@@ -56,6 +51,9 @@ p {
     color: $dark;
 }
 
+.font-canny-teal{
+    color: $tertiary;
+}
 .canny-dark {
     background-color: $dark;
 }

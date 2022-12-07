@@ -1,7 +1,7 @@
 <template lang="pug">
 .w-100.canny-light
   div(v-if="page")
-    .w-100.h4.canny-dark
+    .w-100.canny-dark
       .w-80.center
         h1.pt4.f1.canny-logo-serif.font-canny-yellow.fw5(v-html="page.title")
     .w-80-l.w-100.tc.center.canny-light

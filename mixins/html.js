@@ -1,6 +1,19 @@
 import cheerio from 'cheerio'
 export default {
     methods: {
+        getCookie(name) {
+            function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
+            var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+            return match ? match[1] : null;
+        },
+        registerCookie(cookie) {
+            let d = new Date();
+            d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
+            let expires = "expires=" + d.toUTCString();
+
+            document.cookie =
+               cookie + ";" + expires + 'SameSite=none;';
+        },
         pageProcessor(html, element) {
             if (!element.startsWith("<")) element = "<" + element
 

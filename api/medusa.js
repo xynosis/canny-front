@@ -65,7 +65,6 @@ export default {
 
     return await api.customers.update(updateData)
   },
-  //untested
   async getCustomerOrders() {
     return await api.customers.listOrders()
     //can add params of limit, offset, fields, expand
@@ -117,6 +116,7 @@ export default {
   },
   //untested - may need to be a custom flow
   async logout() {
+    return await api.auth.deleteSession()
     //delete /store/auth
     // let url = baseUrl + "/store/auth"
     // const config = {
@@ -134,17 +134,23 @@ export default {
   },
 
   async getSession() {
+
     return await api.auth.getSession()
 
   },
-  //tested, should workl  but waiting on event bus subscription stuff
   async getPasswordResetToken(email) {
     return await api.customers.generatePasswordToken({ email })
   },
-  //untested
-  // async resetPassword(email, token, password) {
-  //   return await api.customers.resetPassword({ email, token, password })
-  // },
+
+  async resetPassword(data) {
+    const email = data.email
+    const password = data.password
+    const token = data.token
+    console.log(email)
+    console.log(password)
+    console.log(token)
+    return await api.customers.resetPassword({ email, password, token })
+  },
 
 
   /*
@@ -174,12 +180,11 @@ export default {
     return await api.carts.update(cart_id, updateData)
   },
 
-  //untested - for fulfilment providers
-  // async addShippingMethod(cart_id, option_id, data) {
-
-  //   //data may not be present??
-  //   return await api.carts.addShippingMethod(cart_id, { option_id })
-  // },
+  async addShippingMethod(cart_id, option_id, data) {
+    console.log(option_id)
+    //data may not be present??
+    return await api.carts.addShippingMethod(cart_id, { option_id })
+  },
 
   async removeDiscount(cart_id, discount_code) {
     console.log(discount_code)
@@ -234,7 +239,6 @@ export default {
 
     return await api.orders.retrieve(order_id)
   },
-  //untested
 
   async lookupOrder(display_id, email) {
     return await api.orders.lookupOrder({ display_id, email })

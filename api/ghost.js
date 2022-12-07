@@ -8,8 +8,9 @@ import GhostContentAPI from '@tryghost/content-api'
 const api = new GhostContentAPI({
   // url: 'http://167.235.17.97',
   // key: '1c1d90f059643ce3a6653d655d',
+  // url: 'https://edit.fractalsdesign.uk',
   url: 'https://edit.fractalsdesign.uk',
-  key: 'e40284b8b979c0108892264700',
+  key: '454e2499dc49354a2591ee84ea',
   version: 'v3',
 })
 
