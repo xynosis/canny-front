@@ -39,7 +39,7 @@ export const mutations = {
   setColors(state, payload) {
     state.colors = payload
   },
-  setAnimation(state, payload){
+  setAnimation(state, payload) {
     // state.animation = payload
     state.animation = false
   }
@@ -48,8 +48,16 @@ export const mutations = {
 export const actions = {
   async fetchSettings(context) {
     let settingsData = await ghostAPI.getSettings()
-    for (let i=0; i < settingsData.navigation.length; i++ ){
-      settingsData.navigation[i].url =settingsData.navigation[i].url.replace('https://fractalsdesign.uk', '')
+    for (let i = 0; i < settingsData.navigation.length; i++) {
+      settingsData.navigation[i].url = settingsData.navigation[i].url.replace('https://fractalsdesign.uk', '')
+    }
+    for (let items of settingsData.navigation) {
+      if (items.url.slice(-1) == '/') {
+        if (items.label !== 'Home'){
+          items.url = items.url.substring(0, items.url.length - 1)
+
+        }
+      }
     }
     context.commit('setSettings', settingsData)
   },
@@ -71,7 +79,7 @@ export const actions = {
 
     context.commit('setColors', colors)
   },
-  fetchAnimation(context, state){
+  fetchAnimation(context, state) {
     context.commit('setAnimation', state)
   }
 }

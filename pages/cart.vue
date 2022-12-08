@@ -77,7 +77,7 @@ export default {
     ...mapGetters("shop", ["getCart", "getOrder", "getUser"]),
   },
   async mounted() {
-    this.cartInit();
+    // this.cartInit();
     // if (this.getCart === null) {
     //   //TRY TO RETRIEVE CART FIRST
     //   await this.$store.dispatch("shop/createCart");

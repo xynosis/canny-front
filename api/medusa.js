@@ -56,7 +56,7 @@ export default {
   /*
   CUSTOMER
   */
-  //untested
+  
   async getCustomer() {
     return await api.customers.retrieve()
   },
@@ -134,7 +134,7 @@ export default {
   },
 
   async getSession() {
-
+    console.log('hi')
     return await api.auth.getSession()
 
   },
@@ -207,7 +207,7 @@ export default {
   },
   //untested
   async deletePaymentSession(cart_id, provider_id) {
-    return await api.carts.deletePaymentSession(cart_id, provider_id)
+    return await api.carts.deletePaymentSession(cart_id, { provider_id })
   },
   //untested
   // async updatePaymentSession(cart_id, provider_id, data) {

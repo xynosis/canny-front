@@ -74,7 +74,10 @@ header.z-max.w-100(
       )
         font-awesome-icon.dib.ph2.f4-l.f3.font-canny-yellow(icon="user")
         .white.link.f3.f4-l.dib.ph2.dim Account
-      .dib-l.pointer.ma3.pb2(@click="menuHandler('/account')", v-if="getUser === null")
+      .dib-l.pointer.ma3.pb2(
+        @click="menuHandler('/account')",
+        v-if="getUser === null"
+      )
         font-awesome-icon.dib.ph2.f4-l.f3.font-canny-yellow(icon="user")
         .white.link.f3.f4-l.dib.ph2.dim Log in
 </template>
@@ -86,16 +89,20 @@ import { mapGetters } from "vuex";
 export default {
   async mounted() {
     this.loadMenu();
-    await this.$store.dispatch("shop/getSession");
+    if (this.getUser === null && this.$route.path !== "/complete") {
+      await this.$store.dispatch("shop/getSession");
+    }
     window.addEventListener("resize", () => {
       this.loadMenu();
     });
     await this.$store.dispatch("settings/fetchSettings").then(() => {
       this.nav = this.$store.getters["settings/getNav"];
+
       // this.nav = this.getNav;
     });
-
-    this.cartInit();
+    if (this.$route.path !== "/complete") {
+      this.cartInit();
+    }
   },
   computed: {
     ...mapGetters("shop", ["getCart", "getOrder", "getUser"], "settings", [

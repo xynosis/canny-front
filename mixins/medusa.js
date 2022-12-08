@@ -13,6 +13,7 @@ export default {
         },
 
         async freshCart() {
+
             await this.$store.dispatch("shop/createCart");
             this.registerCookie("cart=" + this.getCart.id);
         },
@@ -226,10 +227,13 @@ export default {
             // );
             await this.$stripe.confirmPayment({
                 elements, confirmParams: {
-                    return_url: 'https://test.fractalsdesign.uk/complete'
+                    // return_url: 'https://test.fractalsdesign.uk/complete'
+                    return_url: 'http://localhost:3000/complete'
                 }
             }).then(({ error, paymentIntent }) => {
                 console.error(error)
+                console.log('hi i am a paymentIntent')
+                console.log(paymentIntent)
                 //TODO handle errors
                 // console.log('hello')
             })

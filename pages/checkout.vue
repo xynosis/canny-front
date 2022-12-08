@@ -102,15 +102,16 @@ export default {
   },
 
   async mounted() {
-    await this.cartInit();
-    if (this.getCart.items.length === 0) {
+    // await this.cartInit();
+    if (this.getCart) {
+      await this.startPayment();
+      this.elements = await this.selectStripe();
+      this.stripePaymentElement(this.elements);
+      this.stripeAddressElement(this.elements);
+      await this.getShippingOptions();
+    } else {
       this.$router.push("/cart");
     }
-    await this.startPayment();
-    this.elements = await this.selectStripe();
-    this.stripePaymentElement(this.elements);
-    this.stripeAddressElement(this.elements);
-    await this.getShippingOptions();
     // if (this.getCart.shipping_address.address_1 && this.getCart.shipping_methods.length > 0){
 
     //   this.pay=true;

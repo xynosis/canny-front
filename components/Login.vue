@@ -146,7 +146,9 @@ export default {
     };
   },
   async mounted() {
-    await this.$store.dispatch("shop/getSession");
+    if (this.getUser === null) {
+      await this.$store.dispatch("shop/getSession");
+    }
     if (this.$route.query.hasOwnProperty("reset")) {
       this.resetToken = this.$route.query.reset;
       this.email = this.$route.query.email;
@@ -181,7 +183,7 @@ export default {
             password: this.password,
           };
           try {
-            await this.$store.dispatch("shop/login", data);
+            await this.$store.dispatch("shop/login", data); 
           } catch (e) {
             this.incorrectPass = true;
             // console.error(e)
@@ -234,7 +236,7 @@ export default {
           password: this.password,
           token: this.resetToken,
         };
-  
+
         await this.$store.dispatch("shop/resetPassword", data);
       } else {
         this.passwordError = true;

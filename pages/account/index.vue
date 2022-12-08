@@ -31,7 +31,8 @@ export default {
   },
 
   async mounted() {
-    this.cartInit();
+    // this.cartInit();
+   
   },
   // methods: {
   //   async addShippingAddress() {

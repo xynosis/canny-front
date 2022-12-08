@@ -8,7 +8,7 @@ div
       .w-80-l.w-100.center
         .pointer(@click="$router.push('/account/orders')")
           Button(tertiary="true", text="< Back")
-        h1 Ordered {{ toDate(order.created_at) }}
+        h1 Ordered {{ toDate(order.order.created_at) }}
       Order.center.w-80-l.w-100(:order="order.order", v-if="order")
 </template>
 
@@ -24,7 +24,6 @@ export default {
     let id = this.$route.params.number;
 
     this.order = await this.getAnOrder(id);
-    console.log(this.order.order);
   },
   computed: {
     ...mapGetters("shop", ["getUser"]),

@@ -140,6 +140,8 @@ export const actions = {
   },
   async completeCart(context, cartID) {
     const cartData = await medusaAPI.completeCart(cartID)
+    console.log('cartData')
+    console.log(cartData)
     context.commit('setCart', cartData.data)
   },
   ///------
@@ -188,7 +190,15 @@ export const actions = {
   },
   async getSession(context) {
     try {
-      const userData = await medusaAPI.getSession()
+      const userData = await medusaAPI.getCustomer()
+      //hi future kieran i know you will need this at some point - 
+      //the getsession and getcustomer methods seem to be identical so to save code changes i just changed it here
+
+      //previous code
+      // const userData = await medusaAPI.getSession().then(function (x) {
+      // console.log(x)
+      // })
+
       context.commit('setUser', userData.customer)
     } catch (e) {
       console.log('wtf')
@@ -205,7 +215,7 @@ export const actions = {
     await medusaAPI.logout()
     context.commit('setUser', null)
   },
-  async resetPassword(context,data) {
+  async resetPassword(context, data) {
     console.log(data)
     const userData = await medusaAPI.resetPassword(data)
     context.commit('setUser', userData.customer)
