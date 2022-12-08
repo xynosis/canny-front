@@ -22,8 +22,7 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href:
-          'https://use.typekit.net/gqb3weu.css',
+        href: "https://use.typekit.net/zcz0idm.css"
       }
     ]
   },
