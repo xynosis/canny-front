@@ -9,6 +9,8 @@ main.pa4.black-80
         h1(v-if="signup") Sign up
         h1(v-if="!signup && !passwordReset") Log in
         h1(v-if="passwordReset") Reset your password
+      .mt3(v-if="signUpError")
+        p.red Make sure you have filled out all of the fields below.
       .mt3(v-if="signup")
         label.db.fw6.lh-copy.f3 First name
         input.pa2.input-reset.ba.bg-transparent.outline.w-100(
@@ -101,7 +103,7 @@ main.pa4.black-80
 
         //-back button
         .w-100.pointer(
-          @click="(signup = false), (exists = false), ((passwordError = false), (passwordReset = false))",
+          @click="(signup = false), (exists = false), ((passwordError = false), (passwordReset = false)), (signUpError = false)",
           v-if="signup || (passwordReset && !emailSent && !resetToken)"
         )
           Button(tertiary="true", text="< Back")
@@ -138,6 +140,7 @@ export default {
       passwordValidator: "",
       passwordError: false,
       passwordReset: false,
+      signUpError: false,
       emailSent: false,
       exists: null,
       logAttempt: false,
@@ -183,7 +186,7 @@ export default {
             password: this.password,
           };
           try {
-            await this.$store.dispatch("shop/login", data); 
+            await this.$store.dispatch("shop/login", data);
           } catch (e) {
             this.incorrectPass = true;
             // console.error(e)
@@ -194,23 +197,34 @@ export default {
     },
 
     async signUpMethod() {
-      const user = await medusaAPI.checkEmail(this.email);
-      if (!user.exists) {
-        this.exists = false;
+      if (
+        this.email !== "" ||
+        this.password !== "" ||
+        this.passwordValidator !== "" ||
+        this.first !== "" ||
+        this.last !== ""
+      ) {
+        this.signUpError = false;
+        const user = await medusaAPI.checkEmail(this.email);
+        if (!user.exists) {
+          this.exists = false;
+        } else {
+          this.exists = true;
+        }
+        if (this.password === this.passwordValidator && !this.exists) {
+          this.passwordError = false;
+          let data = {
+            email: this.email,
+            first_name: this.first,
+            last_name: this.last,
+            password: this.password,
+          };
+          await this.$store.dispatch("shop/createUser", data);
+        } else {
+          this.passwordError = true;
+        }
       } else {
-        this.exists = true;
-      }
-      if (this.password === this.passwordValidator && !this.exists) {
-        this.passwordError = false;
-        let data = {
-          email: this.email,
-          first_name: this.first,
-          last_name: this.last,
-          password: this.password,
-        };
-        await this.$store.dispatch("shop/createUser", data);
-      } else {
-        this.passwordError = true;
+        this.signUpError = true;
       }
     },
     viewPass1() {

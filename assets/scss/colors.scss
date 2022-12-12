@@ -3,8 +3,8 @@ $secondary: #DFB036;
 $tertiary: #25B4B1;
 
 $background: #F8F8FF;
-$header-font: 'Poppins', 'Arial', sans-serif;
-$body-font: 'Brandon Grotesque','Arial', sans-serif;
+// $header-font: 'Poppins', 'Arial', sans-serif;
+$body-font: 'Brandon Grotesque', 'brandon-grotesque', 'Arial', sans-serif;
 
 $dark: #323F48;
 $yellow: #DFB036;
@@ -63,16 +63,16 @@ p {
 }
 
 .canny-header {
-    font-family: 'Fairwater Sans';
+    font-family: 'Fairwater Sans', 'fairwater-sans' ;
     font-weight: 500;
 }
 
 .canny-logo-serif {
-    font-family: 'Fairwater Open Serif';
+    font-family: 'Fairwater Open Serif', 'fairwater-open-serif' ;
 }
 
 .canny-logo-script {
-    font-family: 'Fairwater Script';
+    font-family: 'Fairwater Script', 'fairwater-scriopt';
 }
 
 .canny-light {
@@ -107,7 +107,7 @@ p {
 // }
 
 .section-banner{
-    font-family: 'Fairwater Open Serif';
+    font-family: 'Fairwater Open Serif', 'fairwater-open-serif';
     color: $yellow;
     text-align: left;
 }
