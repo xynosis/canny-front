@@ -41,14 +41,14 @@ body{
     background-color: $yellow;
 }
 .canny-header {
-    font-family: 'Fairwater Sans';
+    font-family: 'Fairwater Sans', 'fairwater-sans';
     font-weight: 500;
 }
 .canny-logo-serif {
-    font-family: 'Fairwater Open Serif';
+    font-family: 'Fairwater Open Serif', 'fairwater-open-serif';
 }
 .canny-logo-script {
-    font-family: 'Fairwater Script';
+    font-family: 'Fairwater Script', 'fairwater-script';
 }
 
 .canny-light {
