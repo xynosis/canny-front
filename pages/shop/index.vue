@@ -39,7 +39,7 @@ export default {
   padding-bottom: 40%;
 }
 .canny-header-space  {
-  font-family: "Fairwater Sans";
+  font-family: "Fairwater Sans", 'fairwater-sans';
   font-weight: 500;
   letter-spacing: 4px;
 }
